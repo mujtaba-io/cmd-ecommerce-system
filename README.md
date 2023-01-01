@@ -5,7 +5,7 @@ But instead of using a text file plainly, I created a database-ish thing to stor
 
 ## team members
 1. Mujtaba
-2. Malaika
+2. Malaika (@malaikawahid)
 
 ## notes
 Our instructor did not allow us to use OOP features of Java and any external database. So we must only use what we have studied in our course: Programming Fundamentals.
