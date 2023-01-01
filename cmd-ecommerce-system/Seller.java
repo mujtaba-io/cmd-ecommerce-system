@@ -9,39 +9,17 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
  !BUG REPORTS:
- - AT METHOD:delete():
-   The array:users resizes to existingSize+32 when its element reach
-   existingSize, but in delete() method, I have written the code that
-   the next element takes the space of now-deleted element and so on.
-   Now if the element deleted at index=arraySize-1, accessing eleement
-   at existingSize would invoke IndexOutOfBoundsException.
-
- - AT METHOD:load():
-   The array:data is initialoized bsed on the fields we foun in a file
-   rather than the schema of database that we explicitly defined in class.
-   So if we alter the file and make less enteries externally, the
-   IndexOutOfBoundsException occurs. So we must initialize the array
-   beforehand and use it later.
-
- - null
+  - null
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // START -
 
-// name, email, password, seller,rating, bio
-
 // > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
 // < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <
 // > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
 // < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <
 // > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
-
-// !NOTE:
-// OnStart: Program will call User.load() to lead all necessary data from file. --> load()
-// OnUse: All data manipulation will occur with array:users --> doStuff()
-// OnClose: Program will call User.save() to save the current state of array:users
-//  in a file again to be read back next time OnStart. --> save()
 
 public class Seller {
     public static KoolDB DB = DBModel.DB;
