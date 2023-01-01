@@ -1,4 +1,4 @@
-
+// tea
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
  ~ Author: Muhammad Mujtaba
@@ -8,7 +8,7 @@
 
 
 public class Product {
-    public static MujtabaDB DB = DBModel.DB;
+    public static KoolDB DB = DBModel.DB;
     int ID;
     public Seller seller;
     public String name;
@@ -39,6 +39,23 @@ public class Product {
             products[i] = product;
         }
         return products;
+    }
+
+    public static Product fromID(int productID){
+        Table productTable = DB.getTable("PRODUCT");
+        Data[][] products = productTable.all();
+        for (Data[] product : products){
+            if(product[productTable.tableLayout.getAttributeIndex("ID")].getInteger() == productID){
+                return new Product(
+                        productID,
+                        product[productTable.tableLayout.getAttributeIndex("SELLER_EMAIL")].getString(),
+                        product[productTable.tableLayout.getAttributeIndex("NAME")].getString(),
+                        product[productTable.tableLayout.getAttributeIndex("PRICE")].getDouble(),
+                        product[productTable.tableLayout.getAttributeIndex("DESCRIPTION")].getString()
+                );
+            }
+        }
+        return null;
     }
 
 }

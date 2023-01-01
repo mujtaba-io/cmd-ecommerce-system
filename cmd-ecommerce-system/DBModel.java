@@ -1,4 +1,4 @@
-
+// loneliness
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -12,7 +12,7 @@
 // START -
 
 public class DBModel {
-    public static MujtabaDB DB;
+    public static KoolDB DB;
     public static void init(){
         Table[] tables = {
             // User-table
@@ -29,7 +29,7 @@ public class DBModel {
             // Review-table
             new Table("REVIEW", new TableLayout(
                 new TableAttribute[]{
-                    new TableAttribute("ID", Type.STRING, TableAttribute.Usage.PRIMARY_KEY),
+                    new TableAttribute("ID", Type.INTEGER, TableAttribute.Usage.PRIMARY_KEY),
                     new TableAttribute("TO_SELLER_EMAIL", Type.STRING, TableAttribute.Usage.FOREIGN_KEY),
                     new TableAttribute("BY_USER", Type.STRING, TableAttribute.Usage.STORAGE),
                     new TableAttribute("RATING", Type.DOUBLE, TableAttribute.Usage.STORAGE),
@@ -64,7 +64,7 @@ public class DBModel {
                 })
             ),
         };
-        DB = new MujtabaDB("DB.db", tables);
+        DB = new KoolDB("DB.db", tables);
     }
 }
 

@@ -1,4 +1,4 @@
-
+// pee
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
  ~ Author: Muhammad Mujtaba
@@ -44,7 +44,7 @@
 //  in a file again to be read back next time OnStart. --> save()
 
 public class Seller {
-    public static MujtabaDB DB = DBModel.DB;
+    public static KoolDB DB = DBModel.DB;
     // Seller-specific variables
     public String email, password, name;
     public double rating = 0.0;
@@ -59,9 +59,27 @@ public class Seller {
         this.bio = bio;
     }
 
+    public static Seller[] all(){
+        Table sellerTable = DB.getTable("SELLER");
+        Data[][] sellersData = sellerTable.all();
+        Seller[] sellers = new Seller[sellersData.length];
+        for(int i = 0; i < sellers.length; i++){
+            Seller seller = new Seller(
+                    sellersData[i][sellerTable.tableLayout.getAttributeIndex("EMAIL")].getString(),
+                    sellersData[i][sellerTable.tableLayout.getAttributeIndex("PASSWORD")].getString(),
+                    sellersData[i][sellerTable.tableLayout.getAttributeIndex("NAME")].getString(),
+                    sellersData[i][sellerTable.tableLayout.getAttributeIndex("RATING")].getDouble(),
+                    sellersData[i][sellerTable.tableLayout.getAttributeIndex("BIO")].getString()
+            );
+            sellers[i] = seller;
+        }
+        return sellers;
+    }
+
     public static Seller fromEmail(String sellerEmail){
         Table sellerTable = DB.getTable("SELLER");
         Data[] sellerInfo = sellerTable.getRowByPK(new Data(sellerEmail));
+        if(sellerInfo == null) return null;
         return new Seller(
                 sellerInfo[sellerTable.tableLayout.getAttributeIndex("EMAIL")].getString(),
                 sellerInfo[sellerTable.tableLayout.getAttributeIndex("PASSWORD")].getString(),
@@ -85,8 +103,8 @@ public class Seller {
         String str = "";
         for(Product product: products){
             str += String.format("""
-                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                    - -> ID # %d : %s : $%.1f/- : %s
+                    
+                    %-16d %-16s %-16.1f %-16s
                     """, product.ID, product.name, product.price,product.description);
         }
         return str;
