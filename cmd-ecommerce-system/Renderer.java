@@ -13,7 +13,7 @@
 /*
 *
 * !BUG REPORTS:
-* - null
+* - AT LINE 278: REVIEWS MUST BE FILTERED FOR EACH USER. IT DISPLAYS ALL REVIEWS FOR EVERY USER.
 *
 * !NOTES:
 * - var:PK and var:ID are used interchangeably
